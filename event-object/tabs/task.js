@@ -25,6 +25,7 @@ for (let index = 0; index < tabHtml.length; index++) {
         }
     }
 
+    
     tabName.addEventListener("click", tabNameEvent);
 
 }
