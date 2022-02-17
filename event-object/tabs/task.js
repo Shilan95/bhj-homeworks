@@ -1,27 +1,30 @@
-// дз №3, Задача №3 
-// Управление вкладками
+let tabHtml = Array.from(document.querySelectorAll(".tab"));
+let tabContentHtml = Array.from(document.querySelectorAll(".tab__content"));
 
-let body = document.querySelector('body'); // страница
-let tabs1 = document.getElementById('tabs1'); // меню 1
-body.innerHTML = body.innerHTML + '<div class="tabs" id="tabs2">' + tabs1.innerHTML + '</div>'; // добавляем меню 2
-
-tabs1 = document.getElementById('tabs1'); // обновляем значения tabs1 после изменения DOM
-let tabs2 = document.getElementById('tabs2'); // меню 2
-
-function changeTab(index) { // функция для назначения на выбранное меню переключения вкладок
-    let tabs = Array.from(index.querySelectorAll('.tab')); // массив вкладок
-    let tabContent = Array.from(index.querySelectorAll('.tab__content')); // массив контента для вкладок
-
-    for (let i = 0; i < tabs.length; i++) { // цикл для клика
-        tabs[i].addEventListener('click', function() { // назначение клика на вкладки
-            tabs.forEach(element => element.classList.remove('tab_active')); // удаления класс активной вкладки
-            tabContent.forEach(element => element.classList.remove('tab__content_active')); // удаления класса активного контента
-    
-            tabs[i].classList.add('tab_active'); // добавление активного класса на вкладку
-            tabContent[i].classList.add('tab__content_active'); // добавление активного класса на контент
-        })
+for (let index = 0; index < tabHtml.length; index++) {
+    function giveNameTab(index) {
+        let name = tabHtml[index];
+        return name
     }
-}
 
-changeTab(tabs1); // используем переключение вкладок для меню1
-changeTab(tabs2); // используем переключение вкладок для меню2
+    let tabName = giveNameTab(index);
+
+    function tabNameEvent() {
+
+        if (tabName.className.includes("tab_active")) {
+            return false
+        } else {
+            let elementActive = document.querySelector(".tab_active");
+            let elementContent = document.querySelector(".tab__content_active");
+
+            elementActive.className = "tab";
+            elementContent.className = "tab__content";
+
+            tabName.className += " tab_active";
+            tabContentHtml[index].className += " tab__content_active";
+        }
+    }
+
+    tabName.addEventListener("click", tabNameEvent);
+
+}
